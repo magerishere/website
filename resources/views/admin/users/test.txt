@@ -1,0 +1,11 @@
+    <!-- {!! Form::open(['method'=>'POST','action'=>'route('users.store')']) !!}
+    <div class="form-group">
+    {!! Form::label('title','Title:') !!}
+    {!! Form::text('title',null,['class'=>'form-control']) !!}
+    </div>
+
+    {!! Form::close() !!} -->
+
+
+http://project.local/admin/users
+http://project.local/admin/users

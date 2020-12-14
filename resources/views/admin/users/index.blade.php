@@ -2,12 +2,33 @@
 
 @section('content')
 
+@if(Session::has('created_user'))
+
+<p class="bg-success">{{session('created_user')}}</p>
+
+@endif
+
+@if(Session::has('updated_user'))
+
+<p class="bg-info">{{session('updated_user')}}</p>
+
+@endif
+
+@if(Session::has('deleted_user'))
+
+<p class="bg-danger">{{session('deleted_user')}}</p>
+
+@endif
+
+
+
 <h1>Users</h1>
 
 <table class="table">
     <thead>
       <tr>
         <th>id</th>
+        <th>Photo</th>
         <th>Name</th>
         <th>Email</th>
         <th>Role</th>
@@ -23,7 +44,8 @@
 
       <tr>
         <td>{{$user->id}}</td>
-        <td>{{$user->name}}</td>
+        <td><img width="100" height="50" src="{{$user->photo ? $user->photo->file : 'not found'}}" alt=""></td>
+        <td><a href="/admin/users/{{$user->id}}/edit">{{$user->name}}</a></td>
         <td>{{$user->email}}</td>
         <td>{{$user->role->name}}</td>
         <td>{{$user->is_active == 1 ? 'Active' : 'Disable'}}</td>

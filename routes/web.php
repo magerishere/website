@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminUsersController;
+use App\Http\Controllers\AdminPostsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +24,13 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::resource('/admin/users',AdminUsersController::class);
 
-Route::get('/admin',function(){
-    return view('admin.index');
+Route::group(['middleware'=>'admin'],function(){
+
+    Route::resource('/admin/users',AdminUsersController::class);
+
+    Route::resource('/admin/posts',AdminPostsController::class);
+    
+
 });
+

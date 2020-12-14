@@ -31,7 +31,7 @@
         <td><img src="{{$post->photo->file}}" alt="Not Found" width="100"></td>        
         <td>{{$post->user->name}}</td>
         <td>{{$post->category_id}}</td>
-        <td>{{$post->title}}</td>
+        <td><a href="/admin/posts/{{$post->id}}/edit">{{$post->title}}</a></td>
         <td>{{$post->body}}</td>        
         <td>{{$post->created_at->diffForHumans()}}</td>
         <td>{{$post->updated_at->diffForHumans()}}</td>

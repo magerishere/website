@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Http\Requests\PostsCreateRequest;
+use App\Http\Requests\PostsEditRequest;
 use App\MOdels\Photo;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Category;
 
 
 
@@ -33,7 +34,8 @@ class AdminPostsController extends Controller
     public function create()
     {
         //
-        return view('admin.posts.create');
+        $categories = Category::pluck('name','id')->all();
+        return view('admin.posts.create',compact('categories'));
         
     }
 
@@ -56,6 +58,7 @@ class AdminPostsController extends Controller
             $input['photo_id'] = $photo->id;
 
         }
+    
         $user->post()->create($input);
 
         return redirect('/admin/posts');
@@ -81,7 +84,9 @@ class AdminPostsController extends Controller
     public function edit($id)
     {
         //
-        return view('admin.posts.edit');
+        $post = Post::findOrFail($id);
+        $categories = Category::pluck('name','id')->all();        
+        return view('admin.posts.edit',compact('post','categories'));
         
     }
 
@@ -92,9 +97,26 @@ class AdminPostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostsEditRequest $request, $id)
     {
         //
+        $input = $request->all();
+        $user = Auth::user();
+        
+
+        if($file = $request->file('photo_id')){
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images',$name);
+            $photo = Photo::create(['file'=>$name]);
+            $input['photo_id'] = $photo->id;
+        }
+
+        $user->post()->update($input);
+
+        return redirect('/admin/posts');
+        // return $request->all();
+
+
     }
 
     /**

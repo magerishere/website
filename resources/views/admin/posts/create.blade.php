@@ -10,6 +10,7 @@
 <div class="row">
 
 {!! Form::open(['method'=>'POST','url'=>'/admin/posts','files'=>true]) !!}
+    @csrf
 
     <div class="form-group">
         {!! Form::label('title','Title') !!}
@@ -19,7 +20,7 @@
     
     <div class="form-group">
         {!! Form::label('category_id','Category') !!}
-        {!! Form::select('category_id',[1=>'option'],null,['class'=>'form-control']) !!}
+        {!! Form::select('category_id',[''=>'Choose option'] + $categories,null,['class'=>'form-control']) !!}
     </div>
 
 

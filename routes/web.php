@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\AdminPostsController;
+use App\Http\Controllers\AdminCategoriesController;
+
 
 
 /*
@@ -30,6 +32,8 @@ Route::group(['middleware'=>'admin'],function(){
     Route::resource('/admin/users',AdminUsersController::class);
 
     Route::resource('/admin/posts',AdminPostsController::class);
+
+    Route::resource('/admin/categories',AdminCategoriesController::class);
     
 
 });

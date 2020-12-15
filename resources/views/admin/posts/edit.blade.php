@@ -41,12 +41,20 @@
 
 
     <div class="form-group">
-        {!! Form::submit('Edit Post',['class'=>'btn btn-primary']) !!}
+        {!! Form::submit('Edit Post',['class'=>'btn btn-primary col-sm-6']) !!}
     </div>
 
+    {!! Form::close() !!}
 
+    
+    {!! Form::open(['method'=>'DELETE','url'=>['admin/posts',$post->id]]) !!}
+    @csrf
+    <div class="form-group">
+    {!! Form::submit('Delete Post',['class'=>'btn btn-danger col-sm-6']) !!}
+    </div>
+    {!! Form::close() !!}
 
-
+    </div>
 </div>
 
 

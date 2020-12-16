@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category;
-use Illuminate\Support\Facades\Session;
 
-
-
-class AdminCategoriesController extends Controller
+class CommentRepliesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +14,6 @@ class AdminCategoriesController extends Controller
     public function index()
     {
         //
-        $categories = Category::all();        
-        return view('admin.categories.index',compact('categories'));
     }
 
     /**
@@ -41,12 +35,6 @@ class AdminCategoriesController extends Controller
     public function store(Request $request)
     {
         //
-
-        $categories = Category::create($request->all());
-
-        Session::flash('created_category','Category has been created');
-
-        return redirect('admin/categories');
     }
 
     /**
@@ -69,7 +57,6 @@ class AdminCategoriesController extends Controller
     public function edit($id)
     {
         //
- 
     }
 
     /**
@@ -82,12 +69,6 @@ class AdminCategoriesController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $category = Category::findOrFail($id);
-
-        $category->update($request->all());
-        Session::flash('updated_category','Category has been updated');
-
-        return redirect('admin/categories');
     }
 
     /**
@@ -99,10 +80,5 @@ class AdminCategoriesController extends Controller
     public function destroy($id)
     {
         //
-        Category::findOrFail($id)->delete();
-        Session::flash('deleted_category','Category has been deleted');
-        return redirect('admin/categories');
     }
 }
-
-

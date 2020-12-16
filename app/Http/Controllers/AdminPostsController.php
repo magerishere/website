@@ -77,6 +77,9 @@ class AdminPostsController extends Controller
     public function show($id)
     {
         //
+        $post = Post::findOrFail($id);
+        return view('admin.comments.index',compact('post'));
+
     }
 
     /**
@@ -144,4 +147,6 @@ class AdminPostsController extends Controller
         return redirect('/admin/posts');
 
     }
+
+
 }

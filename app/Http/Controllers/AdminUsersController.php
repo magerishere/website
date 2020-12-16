@@ -9,6 +9,8 @@ use App\Http\Requests\UsersRequest;
 use App\Http\Requests\UserEditRequest;
 use App\Models\Photo;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class AdminUsersController extends Controller

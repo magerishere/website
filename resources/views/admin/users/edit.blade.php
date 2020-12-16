@@ -7,7 +7,7 @@
 
 <div class="row">
         <div class="col-sm-3">
-                <img width="200" src="{{$user->photo->file}}" alt="">
+                <img width="200" src="{{$user->photo ? $user->photo->file : '/images/avatar.png'}}" alt="">
         </div> 
 
     <div class="col-sm-9">
@@ -56,6 +56,7 @@
         {!! Form::open(['method'=>'DELETE','url'=>['/admin/users',$user->id]]) !!}
         @csrf
         {!! Form::submit('Delete User',['class'=>'btn btn-danger pull-right col-sm-6']) !!}
+        {!! Form::close() !!}
         </div>
 
     </div>

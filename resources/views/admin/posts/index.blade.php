@@ -49,7 +49,7 @@
         <td>{{$post->user->name}}</td>
         <td>{{$post->category_id}}</td>
         <td><a href="/admin/posts/{{$post->id}}/edit">{{$post->title}}</a></td>
-        <td>{{$post->body}}</td>        
+        <td>{{Str::limit($post->body,30)}}</td>        
         <td>{{$post->created_at->diffForHumans()}}</td>
         <td>{{$post->updated_at->diffForHumans()}}</td>
       </tr>

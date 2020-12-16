@@ -44,7 +44,7 @@
 
       <tr>
         <td>{{$user->id}}</td>
-        <td><img width="100" height="50" src="{{$user->photo ? $user->photo->file : 'not found'}}" alt=""></td>
+        <td><img width="100" height="50" src="{{$user->photo ? $user->photo->file : '/images/avatar.png'}}" alt=""></td>
         <td><a href="/admin/users/{{$user->id}}/edit">{{$user->name}}</a></td>
         <td>{{$user->email}}</td>
         <td>{{$user->role->name}}</td>

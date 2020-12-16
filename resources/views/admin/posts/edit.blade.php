@@ -10,6 +10,7 @@
 <div class="row">
     <div class="col-sm-3">
             <img width="200" src="{{$post->photo->file}}" alt="">
+            <a href="http://localhost/admin/posts/{{$post->id}}">View comments</a>
     </div> 
 
 <div class="col-sm-9">

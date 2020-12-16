@@ -6,6 +6,26 @@
 
 <h1>Categories</h1>
 
+@if(Session::has('created_category'))
+
+<p class="bg-success">{{session('created_category')}}</p>
+
+@endif
+
+
+@if(Session::has('updated_category'))
+
+<p class="bg-info">{{session('updated_category')}}</p>
+
+@endif
+
+
+@if(Session::has('deleted_category'))
+
+<p class="bg-danger">{{session('deleted_category')}}</p>
+
+@endif
+
 <div class="col-sm-3">
 
     {!! Form::open(['method'=>'POST','url'=>'admin/categories']) !!}

@@ -1,4 +1,6 @@
 <x-app-layout>
+    <h1 class="text-center"><a href="/admin">Click Here</h1>
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
@@ -13,3 +15,4 @@
         </div>
     </div>
 </x-app-layout>
+

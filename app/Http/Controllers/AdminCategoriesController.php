@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
+use JavaScript;
+
 
 
 
@@ -18,8 +22,10 @@ class AdminCategoriesController extends Controller
     public function index()
     {
         //
-        $categories = Category::all();        
+        $categories = Category::all();
+   
         return view('admin.categories.index',compact('categories'));
+
     }
 
     /**
@@ -41,12 +47,23 @@ class AdminCategoriesController extends Controller
     public function store(Request $request)
     {
         //
+        if($request->parent_id){
+            $db = Category::findOrFail($request->parent_id)->name;
+            $data = [
+                'name'=>$request->name,
+                'parent_id'=>$request->parent_id,
+                'parent_name'=>$db,
+            ];
+        }else{
+            $data = [
+                'name'=>$request->name,
+            ];
+        }
 
-        $categories = Category::create($request->all());
+        Category::create($data);
+            
 
-        Session::flash('created_category','Category has been created');
 
-        return redirect('admin/categories');
     }
 
     /**
@@ -83,11 +100,10 @@ class AdminCategoriesController extends Controller
     {
         //
         $category = Category::findOrFail($id);
-
         $category->update($request->all());
-        Session::flash('updated_category','Category has been updated');
 
-        return redirect('admin/categories');
+
+        // return redirect('admin/categories');
     }
 
     /**
@@ -99,10 +115,37 @@ class AdminCategoriesController extends Controller
     public function destroy($id)
     {
         //
+        
         Category::findOrFail($id)->delete();
-        Session::flash('deleted_category','Category has been deleted');
-        return redirect('admin/categories');
+
     }
+
+    public function deleteSelectCategory(Request $request){
+        foreach($request->ids as $id){
+            Category::where('id',$id)->delete();
+        }
+    
+        // return back();
+
+        
+    }
+
+    public function showTest()
+    {
+        return view('admin.shower');
+        
+    
+    }
+
+    public function duplicate(Request $request){
+
+        foreach($request->ids as $id){
+           $category =  Category::where('id',$id)->first();
+           $newCategory = $category->replicate();
+           $newCategory->save();
+        }
+    }
+
 }
 
 

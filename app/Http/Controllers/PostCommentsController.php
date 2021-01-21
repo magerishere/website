@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 
 class PostCommentsController extends Controller
 {
@@ -14,6 +18,8 @@ class PostCommentsController extends Controller
     public function index()
     {
         //
+        $comments = Comment::all();
+        return view('admin.comments.index',compact('comments'));
 
     }
 
@@ -36,6 +42,32 @@ class PostCommentsController extends Controller
     public function store(Request $request)
     {
         //
+        if(Auth::check()){
+            $user = Auth::user();
+            $data = [
+                'post_id'=>$request->post_id,
+                'author'=>$user->name,
+                'email'=>$user->email,
+                'photo'=>$user->photo->file,
+                'body'=>$request->body
+            ];
+
+        }else{
+            $data = [
+                'post_id'=>$request->post_id,
+                'author'=>$request->author,
+                'email'=>$request->email,
+                'body'=>$request->body
+            ];
+        }
+ 
+        Comment::create($data);
+        Session::flash('create_comment','----- Your comment sent and wait for approve it. -----');
+        return back();
+        // return $request->all();
+
+        
+
     }
 
     /**
@@ -70,6 +102,10 @@ class PostCommentsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        
+        Comment::findOrFail($request->id)->update($request->all());
+      
+        return redirect('admin/comments');
     }
 
     /**
@@ -81,5 +117,7 @@ class PostCommentsController extends Controller
     public function destroy($id)
     {
         //
+        Comment::findOrFail($id)->delete();
+        return redirect('admin/comments');
     }
 }

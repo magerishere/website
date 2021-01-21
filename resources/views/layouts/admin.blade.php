@@ -24,6 +24,8 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
+
 @yield('styles')
 
 
@@ -116,7 +118,7 @@
                         <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="/admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <i class="fa fa-dashboard fa-fw"></i> Dashboard
                     </li>
 
                     <li>
@@ -147,7 +149,7 @@
 
                             
                             <li>
-                                <a href="{{url('admin/posts')}}">All Comments</a>
+                                <a href="{{url('admin/comments')}}">All Comments</a>
                             </li>
 
                         </ul>
@@ -162,9 +164,6 @@
                                 <a href="{{url('admin/categories')}}">All Categories</a>
                             </li>
 
-                            <li>
-                                <a href="{{url('admin/categories/create')}}">Create Category</a>
-                            </li>
 
                         </ul>
                         <!-- /.nav-second-level -->

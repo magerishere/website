@@ -1,69 +1,95 @@
-@extends('layouts.admin');
-
+@extends('layout.index')
 
 
 @section('content')
 
+								
+<div class="card card-custom card-transparent">
+	<div class="card-body p-0">
+		<!--begin::Wizard-->
+		<div class="wizard wizard-4" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="true">
 
-<h1>Edit Post</h1>
+			<!--begin::Card-->
+			<div class="card card-custom card-shadowless rounded-top-0">
+				<!--begin::Body-->
+				<div class="card-body p-0">
+					<div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
+						<div class="col-xl-12 col-xxl-10">
+							<!--begin::Wizard Form-->
+							
+								<div class="row justify-content-center">
+									<div class="col-xl-9">
+										<!--begin::Wizard Step 1-->
+										{!! Form::model($post,['method'=>'PATCH','url'=>['admin/posts',$post->id],'files'=>true]) !!}
 
-<div class="row">
-    <div class="col-sm-3">
-            <img width="200" src="{{$post->photo->file}}" alt="">
-            <a href="http://localhost/admin/posts/{{$post->id}}">View comments</a>
-    </div> 
+										<div class="my-5 step" data-wizard-type="step-content" data-wizard-state="current">
+											<h1 class="text-center text-dark font-weight-bold mb-10">ویرایش مطلب </h1>
+											<br>
+											<!--begin::Group-->
+											<div class="form-group row"><img width="800" height="300" src="{{$post->photo->file}}" alt="Not found"></div>
+											<div class="form-group row">
+												{!! Form::label('photo_id','عکس مطلب',['class'=>'col-xl-3 col-lg-3 col-form-label']) !!}
+												<div class="col-lg-9 col-xl-9">
+													{!! Form::file('photo_id',null,['class'=>'form-control form-control-solid form-control-lg']) !!}
+												</div>
+											</div>
+											<!--end::Group-->
 
-<div class="col-sm-9">
-    {!! Form::model($post,['method'=>'PATCH','url'=>['/admin/posts',$post->id],'files'=>true]) !!}
-    @csrf
-
-    <div class="form-group">
-        {!! Form::label('title','Title') !!}
-        {!! Form::text('title',null,['class'=>'form-control']) !!}
-    </div>
-
-    
-    <div class="form-group">
-        {!! Form::label('category_id','Category') !!}
-        {!! Form::select('category_id',[''=>'Choose Optiion'] + $categories,null,['class'=>'form-control']) !!}
-    </div>
-
-
-    <div class="form-group">
-        {!! Form::label('photo_id','Photo') !!}
-        {!! Form::file('photo_id',null,['class'=>'form-control']) !!}
-    </div>
+											<!--begin::Group-->
+											<div class="form-group row">
+												{!! Form::label('category_id','دسته بندی',['class'=>'col-xl-3 col-lg-3 col-form-label']) !!}
+												<div class="col-lg-9 col-xl-9">
+													{!! Form::select('category_id',$categories,null,['class'=>'form-control form-control-solid form-control-lg']) !!}
+												</div>
+											</div>
+											<!--end::Group-->
 
 
-    <div class="form-group">
-        {!! Form::label('body','Description') !!}
-        {!! Form::textarea('body',null,['class'=>'form-control']) !!}
-    </div>
+											<!--begin::Group-->
+											<div class="form-group row">
+												{!! Form::label('title','عنوان مطلب',['class'=>'col-xl-3 col-lg-3 col-form-label']) !!}
+												<div class="col-lg-9 col-xl-9">
+													{!! Form::text('title',null,['class'=>'form-control form-control-solid form-control-lg']) !!}
+												</div>
+											</div>
+											<!--end::Group-->
+							
+											<!--begin::Group-->
 
+											<div class="form-group row">
+												{!! Form::label('body','شرح مطلب',['class'=>'col-xl-3 col-lg-3 col-form-label']) !!}
+												<div class="col-lg-9 col-xl-9">
+													{{-- {!! Form::textarea('body',null,['class'=>'form-control form-control-solid form-control-lg']) !!} --}}
+													<textarea name="body" id="kt-ckeditor-1">{{$post->body}}</textarea>
+												</div>
+											</div>
+											<!--end::Group-->
+									
+											{!! Form::submit('ویرایش مطلب',['class'=>'btn btn-primary form-control']) !!}
+											@foreach ($errors->all() as $error)
 
-    <div class="form-group">
-        {!! Form::submit('Edit Post',['class'=>'btn btn-primary col-sm-6']) !!}
-    </div>
+												<p class="bg-warning form-control">{{$error}}</p>
 
-    {!! Form::close() !!}
-
-    
-    {!! Form::open(['method'=>'DELETE','url'=>['admin/posts',$post->id]]) !!}
-    @csrf
-    <div class="form-group">
-    {!! Form::submit('Delete Post',['class'=>'btn btn-danger col-sm-6']) !!}
-    </div>
-    {!! Form::close() !!}
-
-    </div>
+											@endforeach
+										</div>
+										<!--end::Wizard Step 1-->
+										{!! Form::close() !!}
+									</div>
+								</div>
+							
+							<!--end::Wizard Form-->
+						</div>
+					</div>
+				</div>
+				<!--end::Body-->
+			</div>
+			<!--end::Card-->
+		</div>
+		<!--end::Wizard-->
+	</div>
 </div>
+<!--end::Card-->
 
-
-<div class="row">
-
-@include('includes/form_errors')
-
-</div>
 
 
 @endsection

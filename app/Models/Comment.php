@@ -9,15 +9,27 @@ class Comment extends Model
 {
     use HasFactory;
 
+
+
     protected $fillable = [
         'post_id',
         'is_active',
         'author',
+        'photo',
         'email',
         'body'
     ];
 
-    public function commentReply(){
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function replies(){
         return $this->hasMany('App\Models\CommentReply');
     }
+
+    public function post(){
+        return $this->belongsTo('App\Models\Post');
+    }
+
 }

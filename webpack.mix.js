@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,29 +11,69 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        require('postcss-import'),
-        require('tailwindcss'),
+mix.js("resources/js/app.js", "public/js")
+    .postCss("resources/css/app.css", "public/css", [
+        require("postcss-import"),
+        require("tailwindcss")
     ])
-    .webpackConfig(require('./webpack.config'));
+    .webpackConfig(require("./webpack.config"));
 
+mix.styles(
+    [
+        "resources/assets/plugins/custom/fullcalendar/fullcalendar.bundle.rtl.css",
+        "resources/assets/plugins/global/plugins.bundle.rtl.css",
+        "resources/assets/plugins/custom/prismjs/prismjs.bundle.rtl.css",
+        "resources/assets/css/style.bundle.rtl.css"
+    ],
+    "public/css/admin/main.css"
+);
 
-mix.styles([
-    'resources/assets/css/libs/blog-post.css',
-    'resources/assets/css/libs/bootstrap.css',
-    'resources/assets/css/libs/font-awesome.css',
-    'resources/assets/css/libs/metisMenu.css',
-    'resources/assets/css/libs/sb-admin-2.css',
-],  'public/css/libs.css');
+mix.styles(
+    [
+        "resources/index/css/color-customize/color-customizer.css",
+        "resources/index/css/magnific-popup/magnific-popup.css",
+        "resources/index/css/owl-carousel/owl.carousel.css",
+        "resources/index/css/animate.css",
+        "resources/index/css/base.css",
+        "resources/index/css/bootstrap.min.css",
+        "resources/index/css/fontawesome-all.css",
+        "resources/index/css/line-awesome.min.css",
+        "resources/index/css/responsive.css",
+        "resources/index/css/shortcodes.css",
+        "resources/index/css/style.css"
+    ],
+    "public/css/index/main.css"
+);
 
+mix.scripts(
+    [
+        "resources/assets/plugins/global/plugins.bundle.js",
+        "resources/assets/plugins/custom/prismjs/prismjs.bundle.js",
+        "resources/assets/js/scripts.bundle.js",
+        "resources/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js",
+        "resources/assets/js/pages/widgets.js",
+        "resources/assets/plugins/custom/ckeditor/ckeditor-classic.bundle.js",
+        "resources/assets/js/pages/crud/forms/editors/ckeditor-classic.js"
+    ],
+    "public/js/admin/main.js"
+);
 
-mix.scripts([
-    'resources/assets/js/libs/jquery.js',
-    'resources/assets/js/libs/bootstrap.js',
-    'resources/assets/js/libs/metisMenu.js',
-    'resources/assets/js/libs/sb-admin-2.js',
-    'resources/assets/js/libs/jquery.js',
-    'resources/assets/js/libs/scripts.js',
-
-], 'public/js/libs.js');
+mix.scripts(
+    [
+        "resources/index/js/theme.js",
+        "resources/index/js/color-customize/color-customizer.js",
+        "resources/index/js/contact-form/contact-form.js",
+        "resources/index/js/countdown/jquery.countdown.min.js",
+        "resources/index/js/counter/counter.js",
+        "resources/index/js/magnific-popup/jquery.magnific-popup.min.js",
+        "resources/index/js/menu/jquery.smartmenus.js",
+        "resources/index/js/owl-carousel/owl.carousel.min.js",
+        "resources/index/js/canvas.js",
+        "resources/index/js/confetti.js",
+        "resources/index/js/snap.svg.js",
+        "resources/index/js/step.js",
+        "resources/index/js/theme-script.js",
+        "resources/index/js/wow.min.js"
+    ],
+    "public/js/index/main.js"
+);
